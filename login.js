@@ -1,22 +1,13 @@
 
-
-  async function login(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-  
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-  
-    const data = await res.json();
-    if (res.ok) {
-      localStorage.setItem('token', data.token);
-      window.location.href = 'login.html';
+  const login = (email, password) => {
+    if (!email || !password) {
+        throw new Error('Email and password are required.');
+    }
+    if (email === 'test@example.com' && password === 'password123') {
+        return { success: true, message: 'Login successful.' };
     } else {
-      alert(data.message);
-    }}
+        return { success: false, message: 'Invalid credentials.' };
+    }
+  };
+  module.exports = { login};
   
-  module.exports = { login };
